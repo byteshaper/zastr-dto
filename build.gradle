@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  jcenter()
+}
+
+task wrapper(type: Wrapper) {  gradleVersion = "4.5" }
+
+dependencies {
+  compile 'javax.validation:validation-api:2.0.1.Final'
+}
+
+test {
+  testLogging {
+    events "passed", "skipped", "failed", "standardError"
+    info {
+      events "started", "passed", "skipped", "failed", "standardError"
+      exceptionFormat "full"
+    }
+  }
+}
+
+task sourceJar(type: Jar) { from sourceSets.main.allJava }
+
